@@ -16,25 +16,14 @@
 
 class Superhero
   attr_reader :name, :has_special_tool, :hitpoints, :attack
+  attr_writer :hitpoints, :has_special_tool, :grab_tool
   
 
-  def intialize(input_options)
+  def initialize(input_options)
     @name = input_options [:name]
     @hitpoints = input_options [:hitpoints]
     @attack = input_options [:attack]
-  end
-
-  def name
-    @name
-  end
-
-  def hitpoints
-    @hitpoints
-  end
-
-  def attack
-    @attack
-    @hitpoints -= @attack
+    @has_special_tool = false
   end
 
   def alive
@@ -47,7 +36,16 @@ class Superhero
   end
 
   def has_special_tool
-    
+    @has_special_tool = false
+  end
+
+  def grab_tool
+    @has_special_tool = true
+    @attack = @attack * 3
+  end
+
+  def hit(other)
+     other.hitpoints = other.hitpoints - @attack
   end
 end
 
